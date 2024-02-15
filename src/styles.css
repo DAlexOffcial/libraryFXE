@@ -16,5 +16,5 @@
     text-align: center; 
 }
 #popup.show {
-    display: block;  /* Mostrar cuando tiene la clase 'show' */
+    display: block; 
 }

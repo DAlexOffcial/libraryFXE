@@ -9,13 +9,15 @@ export class MetaMascara {
     constructor() {
         this.createPopupElement();
     }
-
+   
+    // metodo para crear el elemento div con la refencia popup
     private createPopupElement() {
         this.popupElement = document.createElement('div');
         this.popupElement.id = 'popup';
-        document.getElementById('app')?.appendChild(this.popupElement);
+        document.body.appendChild(this.popupElement);  // Cambiado para adjuntar al cuerpo
     }
-
+     
+    //metodo para mostrar el popup 
     show() {
         if (!this.popupElement) {
             // Crea el elemento si aún no existe
