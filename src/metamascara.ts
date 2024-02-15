@@ -1,39 +1,48 @@
 import './styles.css'
 
 export class MetaMascara {
-    private popupElement: HTMLElement | null;
+    private popupElement!: HTMLElement | null;
 
-  
+    private text = 'popup'
+
+    // entra al constuctor y crea el lemento 
     constructor() {
-        this.popupElement = document.getElementById("popup");
+        this.createPopupElement();
     }
 
-    show(){
-        if (this.popupElement) {
-            //this.popupElement.style.display = "block";
+    private createPopupElement() {
+        this.popupElement = document.createElement('div');
+        this.popupElement.id = 'popup';
+        document.getElementById('app')?.appendChild(this.popupElement);
+    }
 
-            // texto en la en el elemento popup
-            this.popupElement.innerText = 'popup';
-           
-            // crear boton dentro el elemento popup
+    show() {
+        if (!this.popupElement) {
+            // Crea el elemento si aún no existe
+            this.createPopupElement();
+        }
+    
+        // Verificación de nulidad antes de acceder a popupElement
+        if (this.popupElement) {
+            // Concatena el texto y el botón antes de asignar el contenido
             this.popupElement.innerHTML = `
-            <h1>Popup</h1>
-            <button id="closeBtn">Cerrar</button>
+                <p>${this.text}</p>
+                <button id="closeBtn">Cerrar</button>
             `;
-            
-            // metodo para cerrar el el popup 
+    
             const closeBtn = this.popupElement.querySelector("#closeBtn") as HTMLButtonElement;
             if (closeBtn) {
                 closeBtn.addEventListener("click", () => {
                     this.hide();
                 });
             }
-        } else {
-            console.error('Elemento de pop-up no encontrado');
+    
+            this.popupElement.classList.add("show");
+            console.log('El pop-up va aquí');
         }
     }
 
-    
+
     hide() {
         /*if (this.popupElement) {
             this.popupElement.style.display = "none";
@@ -45,10 +54,10 @@ export class MetaMascara {
             this.popupElement = null;
         }
     }
-    
+
 }
 
 
-    /*connect(){
-        alert("este metodo ahora esta implemnetado")
-    }*/
+/*connect(){
+    alert("este metodo ahora esta implemnetado")
+}*/
