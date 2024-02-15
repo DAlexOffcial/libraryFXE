@@ -1,8 +1,12 @@
 import './styles.css'
 
 export class MetaMascara {
-    private popupElement!: HTMLElement | null;
+    //declaracion de popupElement que es el div popup
 
+    private popupElement: HTMLElement | null | undefined;
+
+    //propiedades para la configuracion del contenido del popup 
+ 
     private text = 'popup'
 
     // entra al constuctor y crea el lemento 
@@ -12,9 +16,12 @@ export class MetaMascara {
    
     // metodo para crear el elemento div con la refencia popup
     private createPopupElement() {
+        // crear elemento div
         this.popupElement = document.createElement('div');
+        // crear una refencia local en el div previamente creado 
         this.popupElement.id = 'popup';
-        document.body.appendChild(this.popupElement);  // Cambiado para adjuntar al cuerpo
+         // Cambiado para adjuntar al cuerpo
+        document.body.appendChild(this.popupElement); 
     }
      
     //metodo para mostrar el popup 
@@ -31,16 +38,20 @@ export class MetaMascara {
                 <p>${this.text}</p>
                 <button id="closeBtn">Cerrar</button>
             `;
-    
+            
+            // crear el boton con la referenia local closeBtn y darle las propieades que necesita un boton 
             const closeBtn = this.popupElement.querySelector("#closeBtn") as HTMLButtonElement;
+            // Verificacion de nulidad del boton
             if (closeBtn) {
+                // crear el metodo del boton para  poder hacer click y llamar al metodo hide()
                 closeBtn.addEventListener("click", () => {
                     this.hide();
                 });
             }
-    
+             
+            // agregar el metodo show a el metodo popup
             this.popupElement.classList.add("show");
-            console.log('El pop-up va aquí');
+            console.log('popup creado');
         }
     }
 
@@ -49,11 +60,13 @@ export class MetaMascara {
         /*if (this.popupElement) {
             this.popupElement.style.display = "none";
         }*/
+
+        // verificar la nulidad del elemento popup
         if (this.popupElement) {
-
+            // remover el popup de la lista del elemento
             this.popupElement.remove();
-
-            this.popupElement = null;
+            // se hace nulo 
+            this.popupElement = undefined;
         }
     }
 
